@@ -35,7 +35,7 @@ startButton.addEventListener("click", function() {
         const now = new Date();
         const elapsedTime = now - startTime;
 
-        const totalSeconds = Math.floor(elapsedTime / 1000);
+        const totalSeconds = Math.floor(elapsedTime / 1000);//ミリ秒 → 秒に変換して、整数部分だけ取り出す
 
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -118,57 +118,86 @@ function displayRecords(records) {
 
 
 
-    records.forEach(function(record) {
+    records.forEach(function(record) { //forEachの中に処理を書くと、その処理がrecordごとに繰り返される
 
      //データを日付ごとに整理する
-    if (!groupedRecords[record.date]) {
-    groupedRecords[record.date] = [];
-    }
+        if (!groupedRecords[record.date]) {
+        groupedRecords[record.date] = [];
+        }
 
-    groupedRecords[record.date].push(record);//この記録の日付の箱を取り出して、その箱に今の記録をいれる
-
-
-        const totalSeconds = Math.floor(record.time / 1000);
-
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-
-        const h = String(hours).padStart(2, "0");
-        const m = String(minutes).padStart(2, "0");
-        const s = String(seconds).padStart(2, "0");
-
-
-        const li = document.createElement("li");
-
-        li.classList.add("record");
-
-
-        li.textContent =
-            `${record.date}　${record.subject}　${h}:${m}:${s}`;
-
-
-        recordList.appendChild(li);
+        groupedRecords[record.date].push(record);//この記録の日付の箱を取り出して、その箱に今の記録をいれる
 
     });
 
     for (let date in groupedRecords) {
-        const dateTitle = document.createElement("h3");
+
+        const dateTitle = document.createElement("h3");//HTMLの <h3> 要素を新しく作る
         dateTitle.textContent = "📅 " + date;
         recordList.appendChild(dateTitle);//dateTitle を recordList の中に入れる
 
+        const subjectTimes = {};//その科目の合計時間という箱
+
         console.log(groupedRecords[date]);
 
-        groupedRecords[date].forEach(function(record) {
+        groupedRecords[date].forEach(function(record) { //日付の箱の中に入っている記録を、1個ずつ取り出す
+
+            if (!subjectTimes[record.subject]) { //その科目の箱に、まだ値が入っていなかったら
+                subjectTimes[record.subject] = 0; //その科目の合計時間を「0」からスタートさせる
+            }
+
+            subjectTimes[record.subject] += record.time;
+
             console.log(record);
+
+            /*
+            const li = document.createElement("li");
+
+            const totalSeconds = Math.floor(record.time / 1000);//ミリ秒で保存されている時間を、整数の秒数に変換する
+
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            const h = String(hours).padStart(2, "0");
+            const m = String(minutes).padStart(2, "0");
+            const s = String(seconds).padStart(2, "0");
+
+            li.textContent = `${record.subject} ${h}:${m}:${s}`
+
+            recordList.appendChild(li);
+            */
+
+        });
+
+        console.log(subjectTimes);
+
+        for (let subject in subjectTimes) { //subjectTimes の中にある科目名を1つずつ取り出す
+            console.log(subject);
+        }
+
+        for (let subject in subjectTimes) {
+            console.log(subject); //科目名
+            console.log(subjectTimes[subject]); //その科目名を使って、対応する合計時間の箱を取り出す
+
+            const totalSeconds = Math.floor(subjectTimes[subject] / 1000);
+
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            const h = String(hours).padStart(2, "0");
+            const m = String(minutes).padStart(2, "0");
+            const s = String(seconds).padStart(2, "0");
 
             const li = document.createElement("li");
 
-            li.textContent = record.subject;
+            li.textContent = `${subject} ${h}:${m}:${s}`;
+
+            console.log("合計を表示しています", subject, h, m, s);
 
             recordList.appendChild(li);
 
-        });//その日付の箱の中に入っている記録を1個ずつ取り出す
+        }
 
     } //groupedRecordsの中にあるキーを1つずつ取り出して、dateという変数に入れる
 
