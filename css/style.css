@@ -1,0 +1,174 @@
+body {
+    background-color: #d7d2de;
+    text-align: center;
+    place-items: center;
+    height: 50vh;
+}
+
+h1 {
+    color: #311d15;
+    font-size: 4rem;
+    letter-spacing: 0.4rem; 
+    word-spacing: 0.4rem;
+
+}
+
+img {
+    width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+
+p {
+    color: #622d18;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem; 
+    word-spacing: 0.4rem;
+}
+
+h2 {
+    color: #311d15;
+    font-size: 2rem;
+    letter-spacing: 0.2rem; 
+    word-spacing: 0.4rem;
+}
+
+.record-card {
+    width: 400px;
+    height: 400px;
+    margin: 30px auto;
+    padding: 20px;
+
+    background: #f3eeee;
+    border: 1px solid #d8caca;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(80, 60, 60, 0.1);
+
+    box-sizing: border-box;
+}
+
+.record-card h2 {
+    margin: 0;
+    text-align: center;
+
+    color: #594b4b;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+#recordList {
+    height: 320px;
+    margin: 0;
+    padding: 0;
+
+    overflow-y: auto;
+    list-style: none;
+}
+
+#recordList li {
+    padding: 15px 10px;
+
+    color: #594b4b;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-size: 18px;
+
+    border-bottom: 1px solid #d8caca;
+}
+
+#startButton,
+#stopButton {
+    font-family: "Mountains of Christmas", serif;
+    font-size: 1.3rem;
+
+    padding: 12px 35px;
+
+    color: #fff5e6;
+
+background: linear-gradient(
+        to bottom,
+        #8b6560,
+        #604745
+    );
+
+    border: 2px solid #463735;
+    border-radius: 10px;
+
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.2),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.25),
+        0 4px 6px rgba(40, 30, 30, 0.3);
+    margin: 0 15px;
+
+    cursor: pointer;
+}
+.mountains-of-christmas-regular {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mountains-of-christmas-bold {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+#subjectRecords {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#subjectRecords li {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background-color: #f8f3ed;
+    border-radius: 8px;
+}
+
+.subject-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 80%;
+    max-width: 500px;
+
+    margin: 25px auto;
+    padding: 15px 25px;
+
+    background-color: #f8f1e7;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.subject-area label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#subject {
+    flex: 1;
+
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: white;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#customSubject {
+    flex: 1;
+
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    box-sizing: border-box;
+}

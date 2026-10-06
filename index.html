@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ねこきろく</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <h1 class="mountains-of-christmas-bold">∘˚⊹Neco Kintai⊹.˚</h1>
+
+    <p class="mountains-of-christmas-regular">Track your cat's time</p>
+
+    <img src="./img/neko_transparent.png" alt="猫が並んでいる画像">
+
+    <p id="timer">00:00:00</p>
+
+
+    <div class="subject-area">
+
+    <label for="subject">科目</label>
+
+    <select id="subject">
+        <option value="数学">数学</option>
+        <option value="科学">科学</option>
+        <option value="英語">英語</option>
+        <option value="国語">国語</option>
+        <option value="社会">就職活動</option>
+        <option value="プログラミング">プログラミング</option>
+        <option value="other">その他</option>
+    </select>
+
+    <input
+        type="text"
+        id="customSubject"
+        placeholder="科目を入力"
+        style="display: none;"
+    >
+
+    </div>
+
+
+    <button id="startButton" class="mountains-of-christmas-regular">Start</button>
+    <button id="stopButton" class="mountains-of-christmas-regular">Stop</button>
+
+
+    <div class="recordList">
+
+        <div class="todayTime">
+            <h2 class="mountains-of-christmas-bold">Today's Study Time</h2>
+            <p id="todayTime">00:00:00</p>
+
+            <!-- 科目別の勉強時間 -->
+            <h3 class="mountains-of-christmas-bold">Subject Records</h3>
+            <ul id="subjectRecords"></ul>
+        </div>
+
+        <h2 class="mountains-of-christmas-bold">Total Time</h2>
+
+        <ul id="recordList"></ul>
+
+    </div>
+    
+    <script src="./js/script.js"></script>
+</body>
+</html>
