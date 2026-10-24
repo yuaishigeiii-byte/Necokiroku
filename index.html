@@ -4,67 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ねこきろく</title>
-    <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    
-    <h1 class="mountains-of-christmas-bold">∘˚⊹Neco Kintai⊹.˚</h1>
 
-    <p class="mountains-of-christmas-regular">Track your cat's time</p>
+    <main class="app">
 
-    <img src="./img/neko_transparent.png" alt="猫が並んでいる画像">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <h1>ねこきろく</h1>
+            <h2 id="dailyMessage">学習時間を記録しよう</h2>
+            <img class="cat-icon" src="./img/黒猫立ち絵.png" alt="黒猫アイコン">
+        </header>
 
-    <p id="timer">00:00:00</p>
+        <!-- 2カラム（スマホでは縦1列になる） -->
+        <div class="layout">
 
+            <!-- 左カラム：記録 -->
+            <div class="column column-main">
 
-    <div class="subject-area">
+                <!-- 今日の学習時間 -->
+                <section class="today">
+                    <div class="cat-walk" role="img" aria-label="歩くねこ"></div>
+                    <p class="today-label">Today's study time</p>
+                    <p id="todayTime" class="today-time">00:00:00</p>
+                </section>
 
-    <label for="subject">科目</label>
+                <!-- 記録ボタン（押すと下のパネルが開く） -->
+                <button
+                    id="toggleButton"
+                    class="record-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="recordPanel"
+                >
+                    <span id="toggleIcon" aria-hidden="true">＋</span>
+                    <span id="toggleText">教科をえらんでね</span>
+                </button>
 
-    <select id="subject">
-        <option value="数学">数学</option>
-        <option value="科学">科学</option>
-        <option value="英語">英語</option>
-        <option value="国語">国語</option>
-        <option value="社会">就職活動</option>
-        <option value="プログラミング">プログラミング</option>
-        <option value="other">その他</option>
-    </select>
+                <!-- 記録パネル（科目選択・タイマー） -->
+                <div id="recordPanel" class="record-panel" inert>
+                    <div class="record-panel-inner">
+                        <div class="card">
 
-    <input
-        type="text"
-        id="customSubject"
-        placeholder="科目を入力"
-        style="display: none;"
-    >
+                            <div class="subject-area">
+                                <label for="subject">科目</label>
 
-    </div>
+                                <select id="subject">
+                                    <option value="数学">数学</option>
+                                    <option value="科学">科学</option>
+                                    <option value="英語">英語</option>
+                                    <option value="国語">国語</option>
+                                    <option value="就職活動">就職活動</option>
+                                    <option value="プログラミング">プログラミング</option>
+                                    <option value="other">その他</option>
+                                </select>
+                            </div>
 
+                            <input
+                                type="text"
+                                id="customSubject"
+                                class="custom-subject"
+                                placeholder="科目を入力"
+                                hidden
+                            >
 
-    <button id="startButton" class="mountains-of-christmas-regular">Start</button>
-    <button id="stopButton" class="mountains-of-christmas-regular">Stop</button>
+                            <p id="timer" class="timer">00:00:00</p>
 
+                            <div class="button-row">
+                                <button id="startButton" class="btn btn-primary" type="button">Start</button>
+                                <button id="stopButton" class="btn btn-secondary" type="button">Stop</button>
+                            </div>
 
-    <div class="recordList">
+                        </div>
+                    </div>
+                </div>
 
-        <div class="todayTime">
-            <h2 class="mountains-of-christmas-bold">Today's Study Time</h2>
-            <p id="todayTime">00:00:00</p>
+                <!-- 科目別の記録（今日） -->
+                <section class="card">
+                    <h2>科目別の記録</h2>
+                    <ul id="subjectRecords" class="record-rows"></ul>
+                </section>
 
-            <!-- 科目別の勉強時間 -->
-            <h3 class="mountains-of-christmas-bold">Subject Records</h3>
-            <ul id="subjectRecords"></ul>
+                <!-- 日付ごとの記録 -->
+                <section class="card">
+                    <h2>日付ごとの記録</h2>
+                    <div id="recordList"></div>
+                </section>
+
+            </div>
+
+            <!-- 右カラム：カレンダーとグラフ（スマホでは下に表示） -->
+            <div class="column column-side">
+
+                <!-- カレンダー -->
+                <section class="card">
+                    <h2>カレンダー</h2>
+
+                    <div class="calendar-nav">
+                        <button id="prevMonth" class="calendar-nav-button" type="button" aria-label="前の月">‹</button>
+                        <p id="calendarTitle" class="calendar-title"></p>
+                        <button id="nextMonth" class="calendar-nav-button" type="button" aria-label="次の月">›</button>
+                    </div>
+
+                    <div class="calendar-weekdays" aria-hidden="true">
+                        <span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span>
+                    </div>
+
+                    <div id="calendarGrid" class="calendar-grid"></div>
+
+                    <p class="calendar-note">色が濃い日ほど、学習時間が長い日です</p>
+
+                    <div id="dayDetail" class="day-detail"></div>
+                </section>
+
+                <!-- 科目ごとの累計学習時間 -->
+                <section class="card">
+                    <h2>科目ごとの累計学習時間</h2>
+                    <div id="subjectChart"></div>
+                </section>
+
+            </div>
+
         </div>
 
-        <h2 class="mountains-of-christmas-bold">Total Time</h2>
+    </main>
 
-        <ul id="recordList"></ul>
-
-    </div>
-    
     <script src="./js/script.js"></script>
 </body>
 </html>
