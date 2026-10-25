@@ -78,7 +78,7 @@ function setPanelOpen(isOpen) {
     recordPanel.inert = !isOpen;
 
     toggleIcon.textContent = isOpen ? "－" : "＋";
-    toggleText.textContent = isOpen ? "閉じる" : "学習を記録する";
+    toggleText.textContent = isOpen ? "閉じる" : "教科を選んでね";
 }
 
 toggleButton.addEventListener("click", function () {
